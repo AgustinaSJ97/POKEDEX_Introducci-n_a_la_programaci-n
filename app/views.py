@@ -1,6 +1,5 @@
 # capa de vista/presentación
 
-
 from django.shortcuts import redirect, render
 from .layers.services import services
 from django.contrib.auth.decorators import login_required
@@ -21,6 +20,7 @@ def home(request):
     images = services.getAllImages()
     favourite_list = services.getAllFavourites(request)  # solo devuelve favoritos si está autenticado
     return render(request, 'home.html', { 'images': images, 'favourite_list': favourite_list })
+
 
 # función utilizada en el buscador.
 def search(request):
@@ -124,3 +124,4 @@ def deleteFavourite(request):
 def exit(request):
     logout(request)
     return redirect('home')
+
