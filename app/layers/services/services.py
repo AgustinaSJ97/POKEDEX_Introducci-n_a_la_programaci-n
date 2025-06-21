@@ -17,6 +17,8 @@ def getAllImages():
 
     return cards
 
+
+# función que filtra según el nombre del pokemon.
 def filterByCharacter(name):
     filtered_cards = []
 
@@ -34,12 +36,14 @@ def filterByType(type_filter):
             filtered_cards.append(card)
 
     return filtered_cards
+
+
 # añadir favoritos (usado desde el template 'home.html')
 def saveFavourite(request):
-    fav = '' # transformamos un request en una Card (ver translator.py)
-    fav.user = get_user(request) # le asignamos el usuario correspondiente.
+    fav = translator.fromTemplateIntoCard(request)
+    fav.user = get_user(request)
+    return repositories.save_favourite(fav)
 
-    return repositories.save_favourite(fav) # lo guardamos en la BD.
 
 # usados desde el template 'favourites.html'
 def getAllFavourites(request):
@@ -56,9 +60,11 @@ def getAllFavourites(request):
 
     return mapped_favourites
 
+
 def deleteFavourite(request):
     favId = request.POST.get('id')
     return repositories.delete_favourite(favId)
+
 
 #obtenemos de TYPE_ID_MAP el id correspondiente a un tipo segun su nombre
 def get_type_icon_url_by_name(type_name):
