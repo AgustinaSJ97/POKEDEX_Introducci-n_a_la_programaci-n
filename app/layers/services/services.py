@@ -8,11 +8,14 @@ from django.contrib.auth import get_user
 
 # función que devuelve un listado de cards. Cada card representa una imagen de la API de Pokemon
 def getAllImages():
-    # debe ejecutar los siguientes pasos:
-    # 1) traer un listado de imágenes crudas desde la API (ver transport.py)
-    # 2) convertir cada img. en una card.
-    # 3) añadirlas a un nuevo listado que, finalmente, se retornará con todas las card encontradas.
-    pass
+    raw_images = transport.getAllImages()
+    cards = []
+
+    for raw in raw_images:
+        card = translator.fromRequestIntoCard(raw)
+        cards.append(card)
+
+    return cards
 
 # función que filtra según el nombre del pokemon.
 def filterByCharacter(name):
@@ -45,21 +48,20 @@ def saveFavourite(request):
 def getAllFavourites(request):
     if not request.user.is_authenticated:
         return []
-    else:
-        user = get_user(request)
+    
+    user = get_user(request)
+    favourite_list = repositories.get_all_favourites(user)
+    mapped_favourites = []
 
-        favourite_list = [] # buscamos desde el repositories.py TODOS Los favoritos del usuario (variable 'user').
-        mapped_favourites = []
+    for favourite in favourite_list:
+        card = translator.fromRepositoryIntoCard(favourite)
+        mapped_favourites.append(card)
 
-        for favourite in favourite_list:
-            card = '' # convertimos cada favorito en una Card, y lo almacenamos en el listado de mapped_favourites que luego se retorna.
-            mapped_favourites.append(card)
-
-        return mapped_favourites
+    return mapped_favourites
 
 def deleteFavourite(request):
     favId = request.POST.get('id')
-    return repositories.delete_favourite(favId) # borramos un favorito por su ID
+    return repositories.delete_favourite(favId)
 
 #obtenemos de TYPE_ID_MAP el id correspondiente a un tipo segun su nombre
 def get_type_icon_url_by_name(type_name):
