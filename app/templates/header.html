@@ -4,36 +4,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POKEDEX - IP</title>
+    <title>POKEDEX </title>
     {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %} {% load static %}
+    <link rel="icon" type="png" href="{% static 'favicon.png' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+    .type-label {
+    display: inline-block;
+    padding: 2px 4px;
+    margin: 2px 2px 2px 0;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.85em;
+    color: #ffffff;
+    border: 1px solid #000000;
+    text-shadow: 
+        -1px -1px 0 black,
+         1px -1px 0 black,
+        -1px  1px 0 black,
+         1px  1px 0 black;
+    
+    }
+
+    .type-fire {
+    background-color: #f03030;
+    }
+
+    .type-water {
+    background-color: #6890F0;
+    }
+
+    .type-grass {
+    background-color: #78C850;
+    }
+
+    .type-poison {
+    background-color: #A040A0;
+    }
+
+    .type-flying {
+    background-color: #A890F0;
+    }
+
+    .type-bug {
+    background-color: #A8B820;
+    }
+
+    .type-normal {
+    background-color: #A8A878;
+    }
+
+    .type-electric {
+    background-color: #F8D030;
+    }
+
+    .type-ground {
+    background-color: #7a68e0;
+    }
+
+/* Agregá más según los tipos que uses */
+</style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-dark bg-opacity-75 border-bottom border-body" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Proyecto TP</a>
+            <a class="navbar-brand" href="#"><img src="{% static 'LogoPokedex.png' %}" alt="Logo" width="115" height="60" class="d-inline-block align-text-top me-2"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'index-page' %}">Inicio</a>
+                        <a class="nav-link active text-white font-monospace"  aria-current="page" href="{% url 'index-page' %}"><strong>Inicio</strong></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'home' %}"><strong>Galería</strong></a>
+                        <a class="nav-link active text-white font-monospace" aria-current="page" href="{% url 'home' %}"><strong>Galería</strong></a>
                     </li>
                     {% if request.user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'favoritos' %}">Favoritos</a>
+                        <a class="nav-link active text-white font-monospace"  href="{% url 'favoritos' %}"><strong>Favoritos</strong></a>
                     </li>
                     {% endif %}
                     <li class="nav-item">
                         {% if request.user.is_authenticated %}
-                        <a class="nav-link" href="{% url 'exit' %}">Salir</a> {% else %}
-                        <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a> {% endif %}
+                        <a class="nav-link active text-white font-monospace"  href="{% url 'exit' %}"><strong>Cerrar Sesión</strong></a> {% else %}
+                        <a class="nav-link active text-white font-monospace"  href="{% url 'login' %}"><strong>Iniciar Sesión</strong></a> {% endif %}
                     </li>
                 </ul>
 
