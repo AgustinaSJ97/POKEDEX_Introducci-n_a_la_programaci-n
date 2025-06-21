@@ -33,16 +33,9 @@ def search(request):
     else:
         return redirect('home')
 
-    # si el usuario ingresó algo en el buscador, se deben filtrar las imágenes por dicho ingreso.
-    if (name != ''):
-        images = []
-        favourite_list = []
 
-        return render(request, 'home.html', { 'images': images, 'favourite_list': favourite_list })
-    else:
-        return redirect('home')
-
-# función utilizada para filtrar por el tipo del Pokemondef filter_by_type(request):
+# función utilizada para filtrar por el tipo del Pokemon
+def filter_by_type(request):
     type = request.POST.get('type', '').strip()
 
     if type != '':
