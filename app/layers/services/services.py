@@ -17,26 +17,23 @@ def getAllImages():
 
     return cards
 
-# función que filtra según el nombre del pokemon.
 def filterByCharacter(name):
     filtered_cards = []
 
     for card in getAllImages():
-        # debe verificar si el name está contenido en el nombre de la card, antes de agregarlo al listado de filtered_cards.
-        filtered_cards.append(card)
+        if name.lower() in card.name.lower():
+            filtered_cards.append(card)
 
     return filtered_cards
 
-# función que filtra las cards según su tipo.
 def filterByType(type_filter):
     filtered_cards = []
 
     for card in getAllImages():
-        # debe verificar si la casa de la card coincide con la recibida por parámetro. Si es así, se añade al listado de filtered_cards.
-        filtered_cards.append(card)
+        if type_filter.lower() in [t.lower() for t in card.types]:
+            filtered_cards.append(card)
 
     return filtered_cards
-
 # añadir favoritos (usado desde el template 'home.html')
 def saveFavourite(request):
     fav = '' # transformamos un request en una Card (ver translator.py)

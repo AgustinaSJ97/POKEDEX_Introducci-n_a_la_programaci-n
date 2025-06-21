@@ -1,0 +1,15 @@
+{% extends "header.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} Crear cuenta {% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center font-monospace">Crear cuenta</h2>
+    <form method="POST" class="form-group font-monospace">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn text-center btn-success font-monospace">Registrarse</button>
+    </form>
+</div>
+{% endblock %}
